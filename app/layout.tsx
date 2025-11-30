@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     template: '%s | NOCTO Digital'
   },
   description: 'Техническое диджитал-агентство. Продвижение автодилеров (Haval, Chery), разработка на Next.js, сквозная аналитика.',
+  verification: {
+    yandex: 'e0f228c16d5b8103', 
+    google: 'bN3b2r2lqNiEfpXNsBxuf06aSWGOraKvJMfe0mIAG-k', 
+  },
   openGraph: {
     title: 'NOCTO — Техно-культ с Урала',
     description: 'Мы не креативное агентство. Мы делаем сайты со скоростью 0.4с и снижаем цену лида в автобизнесе.',
