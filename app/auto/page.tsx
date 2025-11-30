@@ -1,28 +1,43 @@
+'use client'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
+import { Suspense } from 'react'
 
-export const metadata = {
-  title: 'Маркетинг для автодилеров (Haval, Chery, Exeed) | NOCTO',
-  description: 'Специализированное решение для автобизнеса. Защита от скликивания, сквозная аналитика, продающие сайты.',
+const REPLACEMENTS: Record<string, string> = {
+  haval: 'HAVAL',
+  chery: 'CHERY',
+  exeed: 'EXEED',
+  geely: 'GEELY',
+  omoda: 'OMODA',
+  tank: 'TANK',
+  jetour: 'JETOUR'
 }
 
-export default function AutoPage() {
+// Компонент с динамическим контентом (зависит от URL)
+function AutoHero() {
+  const searchParams = useSearchParams()
+  const brandParam = searchParams.get('brand') || searchParams.get('utm_term') || ''
+  
+  const brand = Object.keys(REPLACEMENTS).find(key => brandParam.toLowerCase().includes(key))
+  const displayBrand = brand ? REPLACEMENTS[brand] : 'АВТОДИЛЕРОВ'
+
   return (
-    <section>
-       {/* HERO BLOCK */}
-       <div className="container-grid">
+      <div className="container-grid">
           <div className="col-left">
              <Breadcrumbs />
              <div style={{ marginTop: '20px' }}>INDUSTRY // AUTO</div>
           </div>
           <div className="col-right">
              <h1 className="huge-text">
-                ПРОДАВАЙТЕ МАШИНЫ, <br/>
-                <span className="highlight">А НЕ КЛИКИ.</span>
+                ПРОДАВАЙТЕ <br/>
+                <span className="highlight">{displayBrand}.</span> А НЕ КЛИКИ.
              </h1>
              <p className="desc">
-                Специализированное решение для дилеров Chery, Haval, Exeed, Omoda, Geely. 
-                Мы знаем, как работает ваш бизнес изнутри. Мы знаем, что такое "Кумулятивная маржа" и почему вам не нужны лиды по 3000 рублей.
+                {brand 
+                  ? `Специализированное решение для дилеров ${displayBrand}. Мы знаем боли именно этой марки. Скликивание, низкая маржа, долгий цикл сделки.` 
+                  : 'Специализированное решение для дилеров Chery, Haval, Exeed, Omoda. Мы знаем, что такое "Кумулятивная маржа" и почему вам не нужны лиды по 3000 рублей.'
+                }
              </p>
              <div style={{ marginTop: '40px' }}>
                 <Link href="/calculator" className="btn-brutal interactive">
@@ -31,6 +46,20 @@ export default function AutoPage() {
              </div>
           </div>
        </div>
+  )
+}
+
+export default function AutoPage() {
+  return (
+    <section>
+       {/* Оборачиваем динамическую часть в Suspense */}
+       <Suspense fallback={
+           <div className="container-grid">
+               <div className="col-right">LOADING DATA...</div>
+           </div>
+       }>
+          <AutoHero />
+       </Suspense>
 
        {/* PAIN POINTS (Боли) */}
        <div className="container-grid">
@@ -73,7 +102,7 @@ export default function AutoPage() {
                    <div className="svc-name">1. ANTI-FRAUD DEFENSE</div>
                 </div>
                 <p className="svc-desc">
-                   Собственная база из 15 000 "мусорных" площадок. Мы блокируем показы в мобильных играх и на сайтах с роботностью  20%.
+                   Собственная база из 15 000 "мусорных" площадок. Мы блокируем показы в мобильных играх и на сайтах с роботностью {'>'} 20%.
                 </p>
              </div>
 

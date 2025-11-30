@@ -37,17 +37,17 @@ export function Header() {
          <Link href="/cases" className={`menu-link interactive ${isActive('/cases')}`}>
             Кейсы
          </Link>
-         <Link href="/calculator" className={`menu-link interactive ${isActive('/calculator')}`} style={{ color: 'var(--accent)' }}>
-            [ROI Calc]
-         </Link>
          <Link href="/blog" className={`menu-link interactive ${isActive('/blog')}`}>
-            Database
+            Блог
          </Link>
          <Link href="/manifesto" className={`menu-link interactive ${isActive('/manifesto')}`}>
             Манифест
          </Link>
          <Link href="/auto" className={`menu-link highlight interactive ${isActive('/auto')}`}>
             [Авто-Дилерам]
+         </Link>
+         <Link href="/calculator" className={`menu-link interactive ${isActive('/calculator')}`} style={{ color: 'var(--accent)' }}>
+            [ROI Calc]
          </Link>
       </nav>
 
