@@ -7,6 +7,8 @@ import { SystemBar } from '../components/SystemBar'
 import { CustomCursor } from '../components/CustomCursor'
 import { WidgetsLayer } from '../components/WidgetsLayer'
 import { Metrika } from '../components/Metrika'
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 const manrope = Manrope({ 
   subsets: ['cyrillic', 'latin'],
@@ -62,7 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WidgetsLayer>
           
           <Metrika />
-          
+          <SpeedInsights/>
+          <Analytics/>
           <div className="noise-overlay" />
           <div className="grid-lines">
              <div className="line"></div>
@@ -148,6 +151,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SystemBar />
           
         </WidgetsLayer>
+        <SpeedInsights/>
+        <Analytics/>
 
       </body>
     </html>
