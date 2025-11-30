@@ -5,8 +5,8 @@ import { Manrope } from 'next/font/google'
 import { Header } from '../components/Header'
 import { SystemBar } from '../components/SystemBar'
 import { CustomCursor } from '../components/CustomCursor'
+import { WidgetsLayer } from '../components/WidgetsLayer'
 import { Metrika } from '../components/Metrika'
-import { WidgetsLayer } from '../components/WidgetsLayer' // <-- НОВЫЙ КОМПОНЕНТ
 
 const manrope = Manrope({ 
   subsets: ['cyrillic', 'latin'],
@@ -14,7 +14,8 @@ const manrope = Manrope({
   variable: '--font-manrope'
 })
 
-const BASE_URL = 'https://nocto.ru'
+// --- НОВЫЙ ДОМЕН ---
+const BASE_URL = 'https://noctocode.ru'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -30,6 +31,22 @@ export const metadata: Metadata = {
     template: '%s | NOCTO Digital'
   },
   description: 'Техническое диджитал-агентство. Продвижение автодилеров (Haval, Chery), разработка на Next.js, сквозная аналитика.',
+  openGraph: {
+    title: 'NOCTO — Техно-культ с Урала',
+    description: 'Мы не креативное агентство. Мы делаем сайты со скоростью 0.4с и снижаем цену лида в автобизнесе.',
+    url: BASE_URL,
+    siteName: 'NOCTO Digital',
+    locale: 'ru_RU',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'NOCTO Digital Cover',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -37,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" suppressHydrationWarning>
       <body className={manrope.className} suppressHydrationWarning>
         
-        {/* Оборачиваем всё в наш клиентский слой виджетов */}
+        {/* Слой виджетов (Модалки, Пасхалки) */}
         <WidgetsLayer>
           
           <Metrika />
@@ -76,10 +93,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '20px', color: '#fff' }}>
                        READY TO DEPLOY?
                     </h2>
-                    <a href="mailto:hello@nocto.ru" className="interactive" style={{ 
-                       fontSize: '2rem', fontWeight: 800, color: 'var(--accent)', textDecoration: 'none' 
+                    <a href="mailto:hello@noctocode.ru" className="interactive" style={{ 
+                       fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--accent)', textDecoration: 'none', wordBreak: 'break-all' 
                     }}>
-                       HELLO@NOCTO.RU
+                       HELLO@NOCTOCODE.RU
                     </a>
                     <p style={{ marginTop: '20px', color: '#666', fontSize: '0.9rem' }}>
                        Екатеринбург, ул. Малышева 51 <br/>
@@ -94,8 +111,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         <li style={{ marginBottom: '10px' }}><Link href="/services" className="interactive hover:text-white">Услуги</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/cases" className="interactive hover:text-white">Кейсы</Link></li>
+                        <li style={{ marginBottom: '10px' }}><Link href="/blog" className="interactive hover:text-white">Блог</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/calculator" className="interactive highlight">[ ROI Калькулятор ]</Link></li>
-                        <li style={{ marginBottom: '10px' }}><Link href="/blog" className="interactive hover:text-white">Database (Блог)</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/proposal" className="interactive hover:text-white">Генератор КП</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/partners" className="interactive highlight">Партнерам</Link></li>
                     </ul>
@@ -109,7 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <li style={{ marginBottom: '10px' }}><Link href="/privacy" className="interactive hover:text-white">Политика конфиденциальности</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/offer" className="interactive hover:text-white">Публичная оферта</Link></li>
                         <li style={{ marginBottom: '20px' }}><Link href="/personal-data" className="interactive hover:text-white">Обработка перс. данных</Link></li>
-                        <li style={{ fontSize: '0.8rem', color: '#444' }}>ИП Иванов И.И. / ИНН 660000000000</li>
+                        <li style={{ fontSize: '0.8rem', color: '#444' }}></li>
                     </ul>
                 </div>
              </div>

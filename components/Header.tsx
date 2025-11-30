@@ -27,9 +27,10 @@ export function Header() {
     <header className="brutal-header">
       <Link href="/" className="logo interactive" onClick={() => setIsMobileMenuOpen(false)}>
          <span>NOCTO</span>
-         <span>NOCTO</span>
+         <span>CODE</span>
       </Link>
 
+      {/* МЕНЮ (Новый порядок) */}
       <nav className={`header-menu ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
          <Link href="/services" className={`menu-link interactive ${isActive('/services')}`}>
             Услуги
@@ -54,7 +55,6 @@ export function Header() {
       <div className="header-right">
          <span className="est">EST. 2025</span>
          
-         {/* Кнопка Генератора КП */}
          <Link href="/proposal" className="interactive" style={{ 
              marginRight: '15px', 
              fontWeight: 800, 
