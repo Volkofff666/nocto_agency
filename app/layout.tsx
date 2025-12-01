@@ -18,7 +18,6 @@ const manrope = Manrope({
   weight: ['400', '500', '700', '800']
 })
 
-// --- НОВЫЙ ДОМЕН ---
 const BASE_URL = 'https://noctocode.ru'
 
 export const viewport: Viewport = {
@@ -57,13 +56,26 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning>
+      <head>
+        {/* Критические inline стили для мгновенной загрузки */}
+        <style dangerouslySetInnerHTML={{__html: `
+          body { 
+            margin: 0; 
+            padding: 0; 
+            background: #050505; 
+            color: #fff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          }
+          * { box-sizing: border-box; }
+          .main-content { min-height: 50vh; }
+        `}} />
+      </head>
       <body className={manrope.className} suppressHydrationWarning>
+        {/* Analytics в самом начале body */}
         <SpeedInsights/>
         <Analytics/>
         
-        {/* Слой виджетов (Модалки, Пасхалки) */}
         <WidgetsLayer>
-          
           <Metrika />
           <div className="noise-overlay" />
           <div className="grid-lines">
@@ -80,7 +92,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
           </main>
 
-          {/* ФУТЕР */}
           <footer style={{ 
               padding: '80px 40px 60px', 
               borderTop: '1px solid var(--line)', 
@@ -132,7 +143,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <li style={{ marginBottom: '10px' }}><Link href="/privacy" className="interactive hover:text-white">Политика конфиденциальности</Link></li>
                         <li style={{ marginBottom: '10px' }}><Link href="/offer" className="interactive hover:text-white">Публичная оферта</Link></li>
                         <li style={{ marginBottom: '20px' }}><Link href="/personal-data" className="interactive hover:text-white">Обработка перс. данных</Link></li>
-                        <li style={{ fontSize: '0.8rem', color: '#444' }}></li>
                     </ul>
                 </div>
              </div>
