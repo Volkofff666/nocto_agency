@@ -13,7 +13,9 @@ import { Analytics } from "@vercel/analytics/next"
 const manrope = Manrope({ 
   subsets: ['cyrillic', 'latin'],
   display: 'swap',
-  variable: '--font-manrope'
+  variable: '--font-manrope',
+  preload: false,
+  weight: ['400', '500', '700', '800']
 })
 
 // --- НОВЫЙ ДОМЕН ---
