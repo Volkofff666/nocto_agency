@@ -481,3 +481,50 @@ input[type=range]::-moz-range-thumb {
 @media (max-width: 600px) {
     .live-widget { display: none; }
 }
+
+
+/* ========================================= */
+/* MOBILE PERFORMANCE PATCH (Добавить в конец) */
+/* ========================================= */
+
+/* 1. ОТКЛЮЧАЕМ КАСТОМНЫЙ КУРСОР НА ТАЧ-СКРИНАХ */
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor, .cursor-follower {
+        display: none !important;
+    }
+    
+    /* Возвращаем системный курсор (на всякий случай) */
+    * {
+        cursor: auto !important;
+    }
+}
+
+/* 2. ОПТИМИЗАЦИЯ АНИМАЦИЙ (GPU ACCELERATION) */
+/* Заставляем видеокарту обрабатывать бегущую строку, а не процессор */
+.scrolling-text, 
+div[style*="animation: scrollText"] {
+    will-change: transform;
+    transform: translate3d(0, 0, 0); /* Включает 3D-ускорение */
+    -webkit-backface-visibility: hidden;
+}
+
+/* 3. ОТКЛЮЧАЕМ ТЯЖЕЛОЕ РАЗМЫТИЕ НА МОБИЛКАХ */
+@media (max-width: 768px) {
+    .brutal-header, 
+    .live-widget, 
+    .modal-overlay {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(5, 5, 5, 0.98) !important; /* Делаем фон почти непрозрачным вместо размытия */
+    }
+    
+    /* Отключаем шум, если он вдруг остался */
+    .noise-overlay {
+        display: none !important;
+    }
+}
+
+/* 4. УСКОРЕНИЕ ОТРИСОВКИ ТЕКСТА */
+body {
+    text-rendering: optimizeSpeed;
+}

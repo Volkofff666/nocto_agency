@@ -56,13 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" suppressHydrationWarning>
       <body className={manrope.className} suppressHydrationWarning>
+        <SpeedInsights/>
+        <Analytics/>
         
         {/* Слой виджетов (Модалки, Пасхалки) */}
         <WidgetsLayer>
           
           <Metrika />
-          <SpeedInsights/>
-          <Analytics/>
           <div className="noise-overlay" />
           <div className="grid-lines">
              <div className="line"></div>
@@ -148,9 +148,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SystemBar />
           
         </WidgetsLayer>
-        <SpeedInsights/>
-        <Analytics/>
-
       </body>
     </html>
   )
