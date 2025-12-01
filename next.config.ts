@@ -1,40 +1,62 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  
   compress: true,
   poweredByHeader: false,
   
+  
+  turbopack: {},
+  
+ 
   experimental: {
-    optimizePackageImports: ['@vercel/analytics', '@vercel/speed-insights'],
+    
+    optimizePackageImports: [
+      '@vercel/analytics', 
+      '@vercel/speed-insights'
+    ],
+  
     webpackBuildWorker: true,
+    
+    optimizeCss: true,
   },
   
-  // Уменьшить количество chunks
-  webpack: (config) => {
-    config.optimization.splitChunks = {
-      chunks: 'all',
-      cacheGroups: {
-        default: false,
-        vendors: false,
-        framework: {
-          name: 'framework',
-          chunks: 'all',
-          test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-          priority: 40,
-          enforce: true,
-        },
-        lib: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'lib',
-          priority: 30,
-          minChunks: 1,
-          reuseExistingChunk: true,
-        },
-      },
-      maxInitialRequests: 5, // Уменьшить с дефолтных 25
-    };
-    return config;
+ 
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  
+
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'X-DNS-Prefetch-Control',
+          value: 'on'
+        },
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=63072000; includeSubDomains; preload'
+        },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff'
+        },
+      ],
+    },
+    {
+      source: '/fonts/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+  ],
 };
 
 export default nextConfig;
